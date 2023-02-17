@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Matrix implements IMatrix {
-    int size;
-    double[] array;
+    private int size;
+    private double[] array;
 
     public double getIJ(int i, int j) {
         if (i >= 0 && i < size && j >= 0 && j < size) {
@@ -24,7 +24,16 @@ public class Matrix implements IMatrix {
     }
 
     public double getDeterminant() {
+        double[] tmpArray = Arrays.copyOf(array, size * size);
+        double result = 1;
+        double tmp = 0;
+        for (int i = 0; i < size; i++) {
+            tmp = tmpArray[i * size + i];
+            for (int j = 0; j < size; j++) {
 
+            }
+        }
+        return 0;
     }
 
     public Matrix(int size) {
@@ -47,7 +56,7 @@ public class Matrix implements IMatrix {
         return result;
     }
 
-    public boolean equals(Object obj) {
+    public boolean equals(Matrix obj) {
         return this.hashCode() == obj.hashCode();
     }
 }
