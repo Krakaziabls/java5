@@ -27,13 +27,24 @@ public class Matrix implements IMatrix {
         double[] tmpArray = Arrays.copyOf(array, size * size);
         double result = 1;
         double tmp = 0;
-        for (int i = 0; i < size; i++) {
-            tmp = tmpArray[i * size + i];
-            for (int j = 0; j < size; j++) {
-
+        double coefficient = 0;
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = i + 1; j <= size - 1; j++) {
+                tmp = tmpArray[j * size + i];
+                coefficient = tmpArray[j * size + i] / tmpArray[i * size + i];
+                for (int k = 0; k < size; k++) {
+                    if (coefficient > 0) {
+                        tmpArray[j * size + k] -= tmpArray[i * size + k] * coefficient;
+                    } else if (coefficient < 0) {
+                        tmpArray[j * size + k] += tmpArray[i * size + k] * coefficient;
+                    }
+                }
             }
         }
-        return 0;
+        for (int i = 0; i < size; i++) {
+            result *= tmpArray[i * size + i];
+        }
+        return result;
     }
 
     public Matrix(int size) {
