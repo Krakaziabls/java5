@@ -26,13 +26,12 @@ public class Matrix implements IMatrix {
     public double getDeterminant() {
         double[] tmpArray = Arrays.copyOf(array, size * size);
         double result = 1;
-        double tmp = 0;
         double coefficient = 0;
-        for (int i = 0; i < size - 1; i++) {
-            for (int j = i + 1; j <= size - 1; j++) {
-                tmp = tmpArray[j * size + i];
+        int i, j, k;
+        for (i = 0; i < size - 1; i++) {
+            for (j = i + 1; j <= size - 1; j++) {
                 coefficient = tmpArray[j * size + i] / tmpArray[i * size + i];
-                for (int k = 0; k < size; k++) {
+                for (k = 0; k < size; k++) {
                     if (coefficient > 0) {
                         tmpArray[j * size + k] -= tmpArray[i * size + k] * coefficient;
                     } else if (coefficient < 0) {
@@ -41,7 +40,7 @@ public class Matrix implements IMatrix {
                 }
             }
         }
-        for (int i = 0; i < size; i++) {
+        for (i = 0; i < size; i++) {
             result *= tmpArray[i * size + i];
         }
         return result;
