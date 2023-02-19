@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Matrix implements IMatrix {
-    private int size;
-    private double[] array;
+    protected int size;
+    protected double[] array;
 
     public double getIJ(int i, int j) {
         if (i >= 0 && i < size && j >= 0 && j < size) {
@@ -59,7 +59,6 @@ public class Matrix implements IMatrix {
         return size;
     }
 
-    @Override
     public int hashCode() {
         int result = Objects.hash(size);
         result = 31 * result + Arrays.hashCode(array);
