@@ -26,23 +26,27 @@ public class DiagMatrix extends Matrix {
     public void setIJ(int i, int j, double element) {
         if (i == j && i >= 0 && i < size) {
             array[i * size + j] = element;
+            actualDeterminant = false;
         } else {
             throw new IllegalArgumentException();
         }
     }
 
     public double getDeterminant() {
-        double[] tmpArray = Arrays.copyOf(array, size * size);
-        double result = 1;
-        int i;
-        for (i = 0; i < size; i++) {
-            if (tmpArray[i * size + i] == 0) {
-                return 0;
-            } else {
-                result *= tmpArray[i * size + i];
+        if (!actualDeterminant) {
+            actualDeterminant = true;
+            double[] tmpArray = Arrays.copyOf(array, size * size);
+            int i;
+            for (i = 0; i < size; i++) {
+                if (tmpArray[i * size + i] == 0) {
+                    actualDeterminant = false;
+                    return 0;
+                } else {
+                    determinant *= tmpArray[i * size + i];
+                }
             }
         }
-        return result;
+        return determinant;
     }
 
     public int getSize() {
