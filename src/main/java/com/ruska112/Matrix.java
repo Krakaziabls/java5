@@ -39,9 +39,33 @@ public class Matrix implements IMatrix {
                     coefficient = tmpArray[j * size + i] / tmpArray[i * size + i];
                     for (k = 0; k < size; k++) {
                         if (coefficient > 0) {
-                            tmpArray[j * size + k] -= tmpArray[i * size + k] * coefficient;
+                            if (tmpArray[i * size + k] > 0) {
+                                if (tmpArray[j * size + k] > 0) {
+                                    tmpArray[j * size + k] -= tmpArray[i * size + k] * coefficient;
+                                } else if (tmpArray[j * size + k] < 0) {
+                                    tmpArray[j * size + k] += tmpArray[i * size + k] * coefficient;
+                                }
+                            } else if (tmpArray[i * size + k] < 0) {
+                                if (tmpArray[j * size + k] > 0) {
+                                    tmpArray[j * size + k] += tmpArray[i * size + k] * coefficient;
+                                } else if (tmpArray[j * size + k] < 0) {
+                                    tmpArray[j * size + k] -= tmpArray[i * size + k] * coefficient;
+                                }
+                            }
                         } else if (coefficient < 0) {
-                            tmpArray[j * size + k] += tmpArray[i * size + k] * coefficient;
+                            if (tmpArray[i * size + k] > 0) {
+                                if (tmpArray[j * size + k] > 0) {
+                                    tmpArray[j * size + k] += tmpArray[i * size + k] * coefficient;
+                                } else if (tmpArray[j * size + k] < 0) {
+                                    tmpArray[j * size + k] -= tmpArray[i * size + k] * coefficient;
+                                }
+                            } else if (tmpArray[i * size + k] < 0) {
+                                if (tmpArray[j * size + k] > 0) {
+                                    tmpArray[j * size + k] -= tmpArray[i * size + k] * coefficient;
+                                } else if (tmpArray[j * size + k] < 0) {
+                                    tmpArray[j * size + k] += tmpArray[i * size + k] * coefficient;
+                                }
+                            }
                         }
                     }
                 }
