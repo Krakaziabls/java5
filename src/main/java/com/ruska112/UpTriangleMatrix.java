@@ -8,14 +8,6 @@ public class UpTriangleMatrix extends Matrix {
         super(size);
     }
 
-    public UpTriangleMatrix(double... elements) {
-        super(elements.length);
-        for (int i = 0; i < elements.length; i++) {
-            array[i * size + i] = elements[i];
-        }
-    }
-
-
     public double getIJ(int i, int j) {
         if (i >= 0 && i < size && j >= 0 && j < size) {
             return array[i * size + j];

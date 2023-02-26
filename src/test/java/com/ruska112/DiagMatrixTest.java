@@ -46,6 +46,6 @@ public class DiagMatrixTest {
         for (int i = 0; i < dm1.getSize(); i++) {
             dm4.setIJ(i, i, dm1.getIJ(i, i));
         }
-        assertNotEquals(dm1, dm4);
+        assertTrue(dm1.equals(dm4));
     }
 }
