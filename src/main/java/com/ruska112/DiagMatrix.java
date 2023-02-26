@@ -10,8 +10,8 @@ public class DiagMatrix extends Matrix {
 
     public DiagMatrix(double... elements) {
         super(elements.length);
-        for (int i = 0; i < elements.length; i++) {
-            array[i * size + i] = elements[i];
+        for (int i = 0; i < size; i++) {
+            setIJ(i, i, elements[i]);
         }
     }
 

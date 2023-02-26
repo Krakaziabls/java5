@@ -50,7 +50,6 @@ public class MatrixTest {
     @Test(expected = IllegalArgumentException.class)
     public void setIJTestException() {
         m1.setIJ(0, 4, 999);
-        m1.getIJ(0, 2);
     }
 
     @Test
@@ -71,5 +70,21 @@ public class MatrixTest {
     @Test
     public void getDeterminantTest2() {
         Assert.assertEquals(0, m3.getDeterminant(), 0.001);
+    }
+
+    @Test
+    public void equalsTest0() {
+        assertNotEquals(m1, m2);
+    }
+
+    @Test
+    public void equalsTest1() {
+        Matrix m4 = new Matrix(m1.getSize());
+        for (int i = 0; i < m1.getSize(); i++) {
+            for (int j = 0; j < m1.getSize(); j++) {
+                m4.setIJ(i, j, m1.getIJ(i, j));
+            }
+        }
+        assertNotEquals(m1, m4);
     }
 }
