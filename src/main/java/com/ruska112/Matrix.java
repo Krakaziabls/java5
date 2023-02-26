@@ -28,51 +28,53 @@ public class Matrix implements IMatrix {
         }
     }
 
+    static void swap(double[] arr, int size, int i1, int j1, int i2, int j2) {
+        double temp = arr[i1 * size + j1];
+        arr[i1 * size + j1] = arr[i2 * size + j2];
+        arr[i2 * size + j2] = temp;
+    }
+
     public double getDeterminant() {
         if (!actualDeterminant) {
             actualDeterminant = true;
             double[] tmpArray = Arrays.copyOf(array, size * size);
-            double coefficient = 0;
-            int i, j, k;
-            for (i = 0; i < size - 1; i++) {
-                for (j = i + 1; j <= size - 1; j++) {
-                    coefficient = tmpArray[j * size + i] / tmpArray[i * size + i];
-                    for (k = 0; k < size; k++) {
-                        if (coefficient > 0) {
-                            if (tmpArray[i * size + k] > 0) {
-                                if (tmpArray[j * size + k] > 0) {
-                                    tmpArray[j * size + k] -= tmpArray[i * size + k] * coefficient;
-                                } else if (tmpArray[j * size + k] < 0) {
-                                    tmpArray[j * size + k] += tmpArray[i * size + k] * coefficient;
-                                }
-                            } else if (tmpArray[i * size + k] < 0) {
-                                if (tmpArray[j * size + k] > 0) {
-                                    tmpArray[j * size + k] += tmpArray[i * size + k] * coefficient;
-                                } else if (tmpArray[j * size + k] < 0) {
-                                    tmpArray[j * size + k] -= tmpArray[i * size + k] * coefficient;
-                                }
-                            }
-                        } else if (coefficient < 0) {
-                            if (tmpArray[i * size + k] > 0) {
-                                if (tmpArray[j * size + k] > 0) {
-                                    tmpArray[j * size + k] += tmpArray[i * size + k] * coefficient;
-                                } else if (tmpArray[j * size + k] < 0) {
-                                    tmpArray[j * size + k] -= tmpArray[i * size + k] * coefficient;
-                                }
-                            } else if (tmpArray[i * size + k] < 0) {
-                                if (tmpArray[j * size + k] > 0) {
-                                    tmpArray[j * size + k] -= tmpArray[i * size + k] * coefficient;
-                                } else if (tmpArray[j * size + k] < 0) {
-                                    tmpArray[j * size + k] += tmpArray[i * size + k] * coefficient;
-                                }
-                            }
-                        }
+            int index;
+            double num1, num2, total = 1;
+            double[] temp = new double[size + 1];
+
+            for (int i = 0; i < size; i++) {
+                index = i;
+
+                while (index < size && tmpArray[index * size + i] == 0) {
+                    index++;
+                }
+                if (index == size) {
+                    return 0;
+                }
+
+                if (index != i) {
+                    for (int j = 0; j < size; j++) {
+                        swap(tmpArray, size, index, j, i, j);
                     }
+                    determinant *= Math.pow(-1, index - i);
+                }
+
+                if (size >= 0) System.arraycopy(tmpArray, i * size, temp, 0, size);
+
+                for (int j = i + 1; j < size; j++) {
+                    num1 = temp[i];
+                    num2 = tmpArray[j * size + i];
+                    for (int k = 0; k < size; k++) {
+                        tmpArray[j * size + k] = (num1 * tmpArray[j * size + k]) - (num2 * temp[k]);
+                    }
+                    total *= num1;
                 }
             }
-            for (i = 0; i < size; i++) {
+            for (int i = 0; i < size; i++) {
                 determinant *= tmpArray[i * size + i];
             }
+            return (determinant / total);
+
         }
         return determinant;
     }
