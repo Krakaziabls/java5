@@ -73,8 +73,8 @@ public class Matrix implements IMatrix {
             for (int i = 0; i < size; i++) {
                 determinant *= tmpArray[i * size + i];
             }
-            return (determinant / total);
-
+            determinant /= total;
+            return determinant;
         }
         return determinant;
     }
