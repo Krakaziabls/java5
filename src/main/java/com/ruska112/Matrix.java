@@ -34,47 +34,83 @@ public class Matrix implements IMatrix {
         arr[i2 * size + j2] = temp;
     }
 
+//    public double getDeterminant() {
+//        if (!actualDeterminant) {
+//            actualDeterminant = true;
+//            determinant = 1;
+//            double[] tmpArray = Arrays.copyOf(array, size * size);
+//            int index;
+//            double num1, num2, total = 1;
+//            double[] temp = new double[size + 1];
+//
+//            for (int i = 0; i < size; i++) {
+//                index = i;
+//
+//                while (index < size && tmpArray[index * size + i] == 0) {
+//                    index++;
+//                }
+//                if (index == size) {
+//                    return 0;
+//                }
+//
+//                if (index != i) {
+//                    for (int j = 0; j < size; j++) {
+//                        swap(tmpArray, size, index, j, i, j);
+//                    }
+//                    determinant *= Math.pow(-1, index - i);
+//                }
+//
+//                if (size >= 0) System.arraycopy(tmpArray, i * size, temp, 0, size);
+//
+//                for (int j = i + 1; j < size; j++) {
+//                    num1 = temp[i];
+//                    num2 = tmpArray[j * size + i];
+//                    for (int k = 0; k < size; k++) {
+//                        tmpArray[j * size + k] = (num1 * tmpArray[j * size + k]) - (num2 * temp[k]);
+//                    }
+//                    total *= num1;
+//                }
+//            }
+//            for (int i = 0; i < size; i++) {
+//                determinant *= tmpArray[i * size + i];
+//            }
+//            determinant /= total;
+//            return determinant;
+//        }
+//        return determinant;
+//    }
+
     public double getDeterminant() {
         if (!actualDeterminant) {
             actualDeterminant = true;
             determinant = 1;
             double[] tmpArray = Arrays.copyOf(array, size * size);
-            int index;
-            double num1, num2, total = 1;
-            double[] temp = new double[size + 1];
-
-            for (int i = 0; i < size; i++) {
+            double coefficient = 0;
+            int i, j, k, s, index;
+            for (i = 0; i < size - 1; i++) {
                 index = i;
-
                 while (index < size && tmpArray[index * size + i] == 0) {
                     index++;
                 }
                 if (index == size) {
                     return 0;
                 }
-
                 if (index != i) {
-                    for (int j = 0; j < size; j++) {
-                        swap(tmpArray, size, index, j, i, j);
+                    for (s = 0; s < size; s++) {
+                        swap(tmpArray, size, index, s, i, s);
                     }
                     determinant *= Math.pow(-1, index - i);
                 }
-
-                if (size >= 0) System.arraycopy(tmpArray, i * size, temp, 0, size);
-
-                for (int j = i + 1; j < size; j++) {
-                    num1 = temp[i];
-                    num2 = tmpArray[j * size + i];
-                    for (int k = 0; k < size; k++) {
-                        tmpArray[j * size + k] = (num1 * tmpArray[j * size + k]) - (num2 * temp[k]);
+                for (j = i + 1; j < size; j++) {
+                    coefficient = tmpArray[j * size + i] / tmpArray[i * size + i];
+                    for (k = 0; k < size; k++) {
+                        tmpArray[j * size + k] -= tmpArray[i * size + k] * coefficient;
                     }
-                    total *= num1;
                 }
             }
-            for (int i = 0; i < size; i++) {
+            for (i = 0; i < size; i++) {
                 determinant *= tmpArray[i * size + i];
             }
-            determinant /= total;
             return determinant;
         }
         return determinant;
