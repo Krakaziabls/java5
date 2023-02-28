@@ -36,6 +36,29 @@ public class UpTriangleMatrixTest {
     }
 
     @Test
+    public void actualDeterminantTest0() {
+        Matrix matrix = new UpTriangleMatrix(3);
+        matrix.array = new double[]
+                {2, 4, 6, 0, 3, 3, 0, 0, 9};
+        matrix.getDeterminant(); // 54
+        matrix.setIJ(1, 1, 5);
+        assertEquals(90, matrix.getDeterminant(), 0.001);
+    }
+
+    @Test
+    public void actualDeterminantTest1() {
+        Matrix matrix = new UpTriangleMatrix(4);
+        matrix.array = new double[]
+                {2, 4, 6, 8,
+                        0, 3, 3, 3,
+                        0, 0, 6, 9,
+                        0, 0, 0, 7};
+        matrix.getDeterminant(); // 252
+        matrix.setIJ(1, 1, 5);
+        assertEquals(420, matrix.getDeterminant(), 0.001);
+    }
+
+    @Test
     public void getSizeTest() {
         assertEquals(3, utm1.getSize());
     }

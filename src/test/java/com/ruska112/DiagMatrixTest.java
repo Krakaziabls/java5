@@ -35,6 +35,22 @@ public class DiagMatrixTest {
     }
 
     @Test
+    public void actualDeterminantTest0() {
+        Matrix matrix = new DiagMatrix(2, 4, 7);
+        matrix.getDeterminant(); // 42
+        matrix.setIJ(0, 0, 5);
+        assertEquals(140, matrix.getDeterminant(), 0.001);
+    }
+
+    @Test
+    public void actualDeterminantTest1() {
+        Matrix matrix = new DiagMatrix(1, 3, 5, 7);
+        matrix.getDeterminant(); // 105
+        matrix.setIJ(2, 2, 99);
+        assertEquals(2079, matrix.getDeterminant(), 0.001);
+    }
+
+    @Test
     public void getSizeTest() {
         assertEquals(3, dm1.getSize(), 0.001);
     }

@@ -37,6 +37,7 @@ public class Matrix implements IMatrix {
     public double getDeterminant() {
         if (!actualDeterminant) {
             actualDeterminant = true;
+            determinant = 1;
             double[] tmpArray = Arrays.copyOf(array, size * size);
             int index;
             double num1, num2, total = 1;

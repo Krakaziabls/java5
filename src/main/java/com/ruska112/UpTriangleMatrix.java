@@ -28,6 +28,7 @@ public class UpTriangleMatrix extends Matrix {
     public double getDeterminant() {
         if (!actualDeterminant) {
             actualDeterminant = true;
+            determinant = 1;
             double[] tmpArray = Arrays.copyOf(array, size * size);
             int i;
             for (i = 0; i < size; i++) {
@@ -38,6 +39,7 @@ public class UpTriangleMatrix extends Matrix {
                     determinant *= tmpArray[i * size + i];
                 }
             }
+            return determinant;
         }
         return determinant;
     }

@@ -8,9 +8,12 @@ import static org.junit.Assert.*;
 
 public class MatrixTest {
     Matrix m1 = new Matrix(3);
+    Matrix m4 = new Matrix(3);
     Matrix m2 = new Matrix(3);
 
     Matrix m3 = new Matrix(4);
+
+    Matrix m5 = new Matrix(4);
 
     @Before
     public void setUp() throws Exception {
@@ -22,8 +25,17 @@ public class MatrixTest {
                 4, 5, -9};
 
         m3.array = new double[]{0, 2, 4, 6,
-                0, 3, 3, 3,
-                0, 4, 5, 9};
+                0, 3, 8, 3,
+                0, 4, 5, 9,
+                1, 3, 4, 5};
+        m4.array = new double[]{3, 3, 3,
+                2, 4, 4,
+                1, 3, 6};
+        m5.array = new double[]
+                {3, 1, 1, 1,
+                        1, 3, 1, 1,
+                        1, 1, 3, 1,
+                        1, 1, 1, 3};
     }
 
     @Test
@@ -69,7 +81,41 @@ public class MatrixTest {
 
     @Test
     public void getDeterminantTest2() {
-        Assert.assertEquals(0, m3.getDeterminant(), 0.001);
+        Assert.assertEquals(48, m3.getDeterminant(), 0.001);
+    }
+
+    @Test
+    public void getDeterminantTest3() {
+        Assert.assertEquals(18, m4.getDeterminant(), 0.001);
+    }
+
+
+    @Test
+    public void getDeterminantTest4() {
+        Assert.assertEquals(48, m5.getDeterminant(), 0.001);
+    }
+
+    @Test
+    public void actualDeterminantTest0() {
+        Matrix matrix = new Matrix(3);
+        matrix.array = new double[]
+                {2, 4, 6, 3, 3, 3, 4, 5, 9};
+        matrix.getDeterminant(); // -18
+        matrix.setIJ(0, 1, 5);
+        assertEquals(-33, matrix.getDeterminant(), 0.001);
+    }
+
+    @Test
+    public void actualDeterminantTest1() {
+        Matrix matrix = new Matrix(4);
+        matrix.array = new double[]
+                {2, 4, 6, 7,
+                        3, 3, 3, 4,
+                        5, 9, 12, 14,
+                        1, 2, 5, 7};
+        matrix.getDeterminant(); // 5
+        matrix.setIJ(0, 1, 5);
+        assertEquals(-26, matrix.getDeterminant(), 0.001);
     }
 
     @Test
