@@ -34,51 +34,8 @@ public class Matrix implements IMatrix {
         arr[i2 * size + j2] = temp;
     }
 
-//    public double getDeterminant() {
-//        if (!actualDeterminant) {
-//            actualDeterminant = true;
-//            determinant = 1;
-//            double[] tmpArray = Arrays.copyOf(array, size * size);
-//            int index;
-//            double num1, num2, total = 1;
-//            double[] temp = new double[size + 1];
-//
-//            for (int i = 0; i < size; i++) {
-//                index = i;
-//
-//                while (index < size && tmpArray[index * size + i] == 0) {
-//                    index++;
-//                }
-//                if (index == size) {
-//                    return 0;
-//                }
-//
-//                if (index != i) {
-//                    for (int j = 0; j < size; j++) {
-//                        swap(tmpArray, size, index, j, i, j);
-//                    }
-//                    determinant *= Math.pow(-1, index - i);
-//                }
-//
-//                if (size >= 0) System.arraycopy(tmpArray, i * size, temp, 0, size);
-//
-//                for (int j = i + 1; j < size; j++) {
-//                    num1 = temp[i];
-//                    num2 = tmpArray[j * size + i];
-//                    for (int k = 0; k < size; k++) {
-//                        tmpArray[j * size + k] = (num1 * tmpArray[j * size + k]) - (num2 * temp[k]);
-//                    }
-//                    total *= num1;
-//                }
-//            }
-//            for (int i = 0; i < size; i++) {
-//                determinant *= tmpArray[i * size + i];
-//            }
-//            determinant /= total;
-//            return determinant;
-//        }
-//        return determinant;
-//    }
+
+
 
     public double getDeterminant() {
         if (!actualDeterminant) {
@@ -93,6 +50,7 @@ public class Matrix implements IMatrix {
                     index++;
                 }
                 if (index == size) {
+                    determinant = 0;
                     return 0;
                 }
                 if (index != i) {
