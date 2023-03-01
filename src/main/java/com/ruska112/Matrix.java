@@ -49,7 +49,7 @@ public class Matrix implements IMatrix {
                 if (index == size) {
                     actualDeterminant = false;
                     determinant = 0;
-                    return 0;
+                    return determinant;
                 }
                 if (index != i) {
                     for (s = 0; s < size; s++) {
