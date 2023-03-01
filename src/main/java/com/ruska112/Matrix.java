@@ -34,9 +34,6 @@ public class Matrix implements IMatrix {
         arr[i2 * size + j2] = temp;
     }
 
-
-
-
     public double getDeterminant() {
         if (!actualDeterminant) {
             actualDeterminant = true;
@@ -50,6 +47,7 @@ public class Matrix implements IMatrix {
                     index++;
                 }
                 if (index == size) {
+                    actualDeterminant = false;
                     determinant = 0;
                     return 0;
                 }
