@@ -19,6 +19,8 @@ public class MatrixTest {
 
     Matrix m6 = new Matrix(4);
 
+    Matrix m250 = new Matrix(5);
+
     @Before
     public void setUp() throws Exception {
         m1.array = new double[]{2, 4, 6,
@@ -52,6 +54,14 @@ public class MatrixTest {
                         6, 7, 5, 8,
                         9, 2, -7, -2
                 };
+
+        m250.array = new double[]{
+                3, -1, 0, -1, 0,
+                0, 1, -2, 0, 2,
+                0, -1, 0, 0, 4,
+                3, 0, 6, -1, 3,
+                5, 0, 3, 0, 1};
+
     }
 
     @Test
@@ -115,9 +125,15 @@ public class MatrixTest {
     public void getDeterminantTest5() {
         Assert.assertEquals(56, zero.getDeterminant(), 0.001);
     }
+
     @Test
     public void getDeterminantTest6() {
         Assert.assertEquals(7595, m6.getDeterminant(), 0.001);
+    }
+
+    @Test
+    public void getDeterminantTest7() {
+        Assert.assertEquals(250, m250.getDeterminant(), 0.001);
     }
 
     @Test
